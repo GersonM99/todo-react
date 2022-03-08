@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import TareaForm from './componentes/TareaForm';
+import Tarea from './componentes/tarea'
 
 function App() {
+  const[listaTareas, setListaTareas] = useState([]);
+
+
+
+  const nuevaTarea = (tarea) => {
+    setListaTareas([tarea, ...listaTareas])
+  }
+  console.log(listaTareas)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TareaForm
+        nuevaTarea={nuevaTarea}>
+      </TareaForm>
+
+      {
+        listaTareas.map(e => <Tarea tarea={e}/>)
+      }
     </div>
   );
 }
